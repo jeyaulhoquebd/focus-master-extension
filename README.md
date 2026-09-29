@@ -35,3 +35,4 @@
   "default_popup": "popup.html",
   "default_icon": "icons/icon48.png"
 }
+
