@@ -1,0 +1,92 @@
+#fm-focus-overlay {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2147483647 !important;
+  background: linear-gradient(135deg, #0d1117 0%, #161b22 100%) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 24px !important;
+  font-family: 'Hind Siliguri', system-ui, -apple-system, sans-serif !important;
+  color: #e6edf3 !important;
+  animation: fm-fade 0.35s ease !important;
+}
+
+@keyframes fm-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+#fm-focus-overlay .fm-card {
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+  background: #161b22;
+  border: 1px solid #2a3340;
+  border-radius: 20px;
+  padding: 44px 32px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+#fm-focus-overlay .fm-icon {
+  font-size: 64px;
+  margin-bottom: 12px;
+  animation: fm-pulse 2.4s infinite;
+}
+
+@keyframes fm-pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.08); }
+}
+
+#fm-focus-overlay h1 {
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0 0 10px;
+  color: #e6edf3;
+  line-height: 1.35;
+}
+
+#fm-focus-overlay p {
+  color: #8b98a8;
+  font-size: 15px;
+  margin: 0 0 8px;
+  line-height: 1.65;
+}
+
+#fm-focus-overlay .fm-timer {
+  font-size: 44px;
+  font-weight: 700;
+  color: #34d399;
+  margin: 20px 0 10px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 1px;
+}
+
+#fm-focus-overlay .fm-hint {
+  font-size: 13px;
+  color: #6e7a8a;
+  margin-top: 8px;
+}
+
+#fm-focus-overlay .fm-actions {
+  margin-top: 28px;
+}
+
+#fm-focus-overlay button {
+  padding: 12px 26px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #34d399, #60a5fa);
+  color: #04120c;
+  border: none;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.2s;
+}
+
+#fm-focus-overlay button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(52, 211, 153, 0.35);
+}
