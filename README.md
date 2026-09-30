@@ -1,5 +1,7 @@
 # 🎯 ফোকাস মাস্টার — Chrome Extension
 
+ [text](../../..)
+
 ## ইনস্টল করার নিয়ম
 
 1. `focus-master-extension` ফোল্ডারটি ডাউনলোড করুন।
