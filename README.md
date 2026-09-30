@@ -1,6 +1,6 @@
 # 🎯 ফোকাস মাস্টার — Chrome Extension
 
- [text](../../..)
+https://www.youtube.com/watch?v=6zfxeBBYTxo
 
 ## ইনস্টল করার নিয়ম
 
