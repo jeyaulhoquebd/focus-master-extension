@@ -1,14 +1,6 @@
 # 🎯 ফোকাস মাস্টার — Chrome Extension
 
-<iframe 
-  width="800" 
-  height="450" 
-  src="https://www.youtube.com/embed/6zfxeBBYTxo" 
-  title="Focus Master Demo" 
-  frameborder="0" 
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-  allowfullscreen>
-</iframe>
+[![▶ Watch on YouTube](https://img.shields.io/badge/▶_Watch_Video-YouTube-red?style=for-the-badge&logo=youtube)](https://www.youtube.com/watch?v=6zfxeBBYTxo)
 
 ## ইনস্টল করার নিয়ম
 
