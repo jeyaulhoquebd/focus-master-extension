@@ -1,6 +1,8 @@
 # 🎯 ফোকাস মাস্টার — Chrome Extension
 
 [![Focus Master Demo](https://img.youtube.com/vi/6zfxeBBYTxo/maxresdefault.jpg)](https://www.youtube.com/watch?v=6zfxeBBYTxo)
+
+### এক্সটেনশনটি দেখে নিন 🫱 https://www.youtube.com/watch?v=6zfxeBBYTxo
  
 ## ইনস্টল করার নিয়ম
 
