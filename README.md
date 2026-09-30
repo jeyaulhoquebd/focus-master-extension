@@ -1,6 +1,6 @@
 # 🎯 ফোকাস মাস্টার — Chrome Extension
 
-[![▶ Watch on YouTube](https://img.shields.io/badge/▶_Watch_Video-YouTube-red?style=for-the-badge&logo=youtube)](https://www.youtube.com/watch?v=6zfxeBBYTxo)
+[![Focus Master Demo](https://img.youtube.com/vi/6zfxeBBYTxo/maxresdefault.jpg)](https://www.youtube.com/watch?v=6zfxeBBYTxo)
 
 ## ইনস্টল করার নিয়ম
 
