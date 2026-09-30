@@ -1,30 +1,22 @@
 {
   "manifest_version": 3,
   "name": "ফোকাস মাস্টার — এক সময়ে একটাই কাজ",
-  "version": "1.0.0",
-  "description": "Pomodoro টাইমার, সাইট ব্লকার, লক্ষ্য, Distraction List — মনোযোগ ধরে রাখার ৮টি অভ্যাস।",
+  "version": "3.0.0",
+  "description": "Habit Tracker, Pomodoro, Focus Guard, সাইট ব্লকার, Notes — মনোযোগ বাড়ানোর সবকিছু।",
   "action": {
     "default_popup": "popup.html",
     "default_title": "ফোকাস মাস্টার"
   },
-  "background": {
-    "service_worker": "background.js"
-  },
+  "background": { "service_worker": "background.js" },
   "permissions": [
-    "storage",
-    "notifications",
-    "alarms",
-    "tabs",
-    "scripting"
+    "storage", "notifications", "alarms", "tabs", "scripting", "offscreen"
   ],
   "host_permissions": ["<all_urls>"],
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["content.js"],
-      "css": ["content.css"],
-      "run_at": "document_start",
-      "all_frames": false
-    }
-  ]
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": ["content.js"],
+    "css": ["content.css"],
+    "run_at": "document_start",
+    "all_frames": false
+  }]
 }

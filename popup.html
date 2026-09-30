@@ -16,8 +16,9 @@
   <nav class="tabs">
     <button class="tab active" data-tab="timer" title="টাইমার">⏱️</button>
     <button class="tab" data-tab="goal" title="লক্ষ্য">🎯</button>
-    <button class="tab" data-tab="block" title="ব্লক">🚫</button>
-    <button class="tab" data-tab="habits" title="অভ্যাস">📋</button>
+    <button class="tab" data-tab="ht" title="Habit Tracker">📋</button>
+    <button class="tab" data-tab="guard" title="Focus Guard">🛡️</button>
+    <button class="tab" data-tab="habits" title="৮টি অভ্যাস">✅</button>
     <button class="tab" data-tab="settings" title="সেটিংস">⚙️</button>
   </nav>
 
@@ -30,7 +31,6 @@
         <button class="chip" data-preset="30,5">৩০/৫</button>
         <button class="chip" data-preset="50,10">৫০/১০</button>
       </div>
-
       <div class="ring-wrap">
         <svg viewBox="0 0 200 200" class="ring">
           <circle class="ring-bg" cx="100" cy="100" r="88"/>
@@ -42,20 +42,19 @@
           <div class="round" id="roundLabel">রাউন্ড ১ / ৪</div>
         </div>
       </div>
-
       <div class="controls">
         <button class="btn primary" id="startBtn">শুরু</button>
         <button class="btn ghost" id="resetBtn">রিসেট</button>
         <button class="btn ghost" id="skipBtn">স্কিপ</button>
       </div>
-
       <div class="stats">
         <div><b id="todaySessions">0</b><span>আজকের সেশন</span></div>
         <div><b id="todayFocus">0</b><span>মিনিট ফোকাস</span></div>
       </div>
+      <p class="hint" style="margin-top:10px;text-align:center">🔊 সেশন শেষে ৫ সেকেন্ড এলার্ম</p>
     </section>
 
-    <!-- ========== GOAL + DISTRACTION ========== -->
+    <!-- ========== GOAL ========== -->
     <section class="panel" data-panel="goal">
       <h3>🎯 আজকের লক্ষ্য</h3>
       <p class="hint">অস্পষ্ট নয় — নির্দিষ্ট ও পরিমাপযোগ্য।</p>
@@ -65,7 +64,6 @@
       <div class="divider"></div>
 
       <h3>🗒️ Distraction List</h3>
-      <p class="hint">কাজের মাঝে অন্য চিন্তা এলে এখানে লিখে রাখুন।</p>
       <div class="add-row">
         <input id="distInput" placeholder="চিন্তাটি লিখুন..."/>
         <button class="btn primary" id="distAdd">+</button>
@@ -73,19 +71,52 @@
       <ul id="distList" class="dist-list"></ul>
     </section>
 
-    <!-- ========== BLOCKER ========== -->
-    <section class="panel" data-panel="block">
+    <!-- ========== HABIT TRACKER (NEW) ========== -->
+    <section class="panel" data-panel="ht">
+      <h3>📋 Habit Tracker</h3>
+      <p class="hint">প্রতিটি অভ্যাসে লাইভ counter ও আলাদা Notes।</p>
+
+      <!-- Add form -->
+      <div class="ht-form">
+        <input id="htName" placeholder="অভ্যাসের নাম (যেমন: ১ ঘণ্টা Coding)"/>
+        <div class="ht-row">
+          <input type="date" id="htStart" title="শুরুর তারিখ"/>
+          <input type="number" id="htTarget" min="1" value="30" title="লক্ষ্য (দিন)"/>
+        </div>
+        <button class="btn primary full" id="htAdd">➕ অভ্যাস শুরু করুন</button>
+      </div>
+
+      <!-- List -->
+      <div id="htList" class="ht-list"></div>
+    </section>
+
+    <!-- ========== FOCUS GUARD (NEW) ========== -->
+    <section class="panel" data-panel="guard">
+      <h3>🛡️ Focus Guard</h3>
+      <p class="hint">Focus Mode চালু থাকলে ট্যাব ছেড়ে গেলে distraction গণনা হবে।</p>
+
       <div class="switch-row">
         <div>
-          <b>সাইট ব্লকার</b>
-          <p class="hint">নিচের সাইটগুলো ফোকাসের সময় ব্লক হবে।</p>
+          <b>🔒 Focus Mode</b>
+          <p class="hint">নিচের সাইট ব্লক + ট্যাব ছাড়া ট্র্যাক করবে।</p>
         </div>
         <label class="switch">
-          <input type="checkbox" id="blockToggle">
+          <input type="checkbox" id="guardToggle">
           <span class="slider"></span>
         </label>
       </div>
 
+      <div class="guard-status" id="guardStatus"></div>
+
+      <div class="guard-stats">
+        <div><b id="gDistractions">0</b><span>Distraction</span></div>
+        <div><b id="gBlocked">0</b><span>ব্লক সাইট</span></div>
+        <div><b id="gTime">0s</b><span>Focus সময়</span></div>
+      </div>
+
+      <div class="divider"></div>
+
+      <h3>🚫 ব্লক করা সাইট</h3>
       <div class="quick-add">
         <button data-site="facebook.com">Facebook</button>
         <button data-site="youtube.com">YouTube</button>
@@ -94,90 +125,95 @@
         <button data-site="reddit.com">Reddit</button>
         <button data-site="tiktok.com">TikTok</button>
       </div>
-
-      <div class="add-row">
+      <div class="add-row" style="margin-top:10px">
         <input id="siteInput" placeholder="যেমন: tiktok.com"/>
         <button class="btn primary" id="siteAdd">যোগ</button>
       </div>
-
       <ul id="siteList" class="site-list"></ul>
     </section>
 
-    <!-- ========== HABITS ========== -->
+    <!-- ========== 8 HABITS ========== -->
     <section class="panel" data-panel="habits">
-      <h3>📋 ৮টি অভ্যাস</h3>
-      <p class="hint">প্রতিদিন চেক করুন — অগ্রগতি স্বয়ংক্রিয়ভাবে সেভ হবে।</p>
+      <h3>📋 ৮টি অভ্যাস — আজকের অগ্রগতি</h3>
+      <p class="hint">প্রতিদিন স্বয়ংক্রিয়ভাবে সেভ হয়।</p>
 
-      <details class="habit">
-        <summary>০১ · 🎯 এক সময়ে একটাই কাজ</summary>
+      <div class="daily-progress">
+        <div class="dp-top">
+          <span id="habitProgressLabel">০ / ১৭ সম্পন্ন · ০%</span>
+          <span class="dp-date" id="habitTodayDate"></span>
+        </div>
+        <div class="dp-bar"><div class="dp-fill" id="habitProgressBar"></div></div>
+      </div>
+
+      <div class="weekly-strip">
+        <div class="ws-title">গত ৭ দিন</div>
+        <div class="ws-days" id="weeklyDays"></div>
+      </div>
+
+      <div class="divider"></div>
+
+      <details class="habit" data-habit="h1">
+        <summary><span>০১ · 🎯 এক সময়ে একটাই কাজ</span><span class="habit-badge" data-badge="h1">0/3</span></summary>
         <div class="habit-body">
-          <p>Multitasking brain-এর জন্য ক্ষতিকর — একসাথে অনেক কাজ করলে কোনোটাই ঠিকভাবে হয় না।</p>
-          <label class="check"><input type="checkbox" data-chk="h1a"><span>একটি নির্দিষ্ট কাজ বেছে নিয়েছি</span></label>
-          <label class="check"><input type="checkbox" data-chk="h1b"><span>বাকি ট্যাব/অ্যাপ বন্ধ করেছি</span></label>
-          <label class="check"><input type="checkbox" data-chk="h1c"><span>কাজ শেষ না হওয়া পর্যন্ত switch করিনি</span></label>
+          <label class="check"><input type="checkbox" data-chk="h1a" data-habit="h1"><span>একটি নির্দিষ্ট কাজ বেছে নিয়েছি</span></label>
+          <label class="check"><input type="checkbox" data-chk="h1b" data-habit="h1"><span>বাকি ট্যাব/অ্যাপ বন্ধ করেছি</span></label>
+          <label class="check"><input type="checkbox" data-chk="h1c" data-habit="h1"><span>কাজ শেষ না হওয়া পর্যন্ত switch করিনি</span></label>
         </div>
       </details>
 
-      <details class="habit">
-        <summary>০২ · ⏱️ ২৫–৩০ মিনিট Focus Session</summary>
+      <details class="habit" data-habit="h2">
+        <summary><span>০২ · ⏱️ ২৫–৩০ মিনিট Focus</span><span class="habit-badge" data-badge="h2">0/2</span></summary>
         <div class="habit-body">
-          <p>২৫ মিনিট কাজ → ৫ মিনিট বিরতি। ৪ সেশন শেষে ১৫ মিনিট বড় বিরতি।</p>
-          <label class="check"><input type="checkbox" data-chk="h2a"><span>কমপক্ষে ২টি সেশন করেছি</span></label>
-          <label class="check"><input type="checkbox" data-chk="h2b"><span>বিরতিতে ফোন ব্যবহার করিনি</span></label>
+          <label class="check"><input type="checkbox" data-chk="h2a" data-habit="h2"><span>কমপক্ষে ২টি সেশন করেছি</span></label>
+          <label class="check"><input type="checkbox" data-chk="h2b" data-habit="h2"><span>বিরতিতে ফোন ব্যবহার করিনি</span></label>
         </div>
       </details>
 
-      <details class="habit">
-        <summary>০৩ · 📱 ফোন চোখের আড়ালে</summary>
+      <details class="habit" data-habit="h3">
+        <summary><span>০৩ · 📱 ফোন দূরে</span><span class="habit-badge" data-badge="h3">0/2</span></summary>
         <div class="habit-body">
-          <p>Silent করাই যথেষ্ট নয় — ফোন অন্য রুমে বা ব্যাগে রাখুন।</p>
-          <label class="check"><input type="checkbox" data-chk="h3a"><span>ফোন অন্য রুমে/ব্যাগে রেখেছি</span></label>
-          <label class="check"><input type="checkbox" data-chk="h3b"><span>ল্যাপটপে ফোনের notification বন্ধ</span></label>
+          <label class="check"><input type="checkbox" data-chk="h3a" data-habit="h3"><span>ফোন অন্য রুমে/ব্যাগে রেখেছি</span></label>
+          <label class="check"><input type="checkbox" data-chk="h3b" data-habit="h3"><span>ল্যাপটপে ফোনের notification বন্ধ</span></label>
         </div>
       </details>
 
-      <details class="habit">
-        <summary>০৪ · 📝 ছোট লক্ষ্য লিখুন</summary>
+      <details class="habit" data-habit="h4">
+        <summary><span>০৪ · 📝 ছোট লক্ষ্য</span><span class="habit-badge" data-badge="h4">0/2</span></summary>
         <div class="habit-body">
-          <p>❌ "আজ Programming শিখব" → ✅ "JavaScript-এর array methods শেষ করব, ৩টি problem solve করব।"</p>
-          <label class="check"><input type="checkbox" data-chk="h4a"><span>আজকের লক্ষ্য লিখেছি</span></label>
-          <label class="check"><input type="checkbox" data-chk="h4b"><span>লক্ষ্যটি নির্দিষ্ট ও পরিমাপযোগ্য</span></label>
+          <label class="check"><input type="checkbox" data-chk="h4a" data-habit="h4"><span>আজকের লক্ষ্য লিখেছি</span></label>
+          <label class="check"><input type="checkbox" data-chk="h4b" data-habit="h4"><span>লক্ষ্যটি নির্দিষ্ট ও পরিমাপযোগ্য</span></label>
         </div>
       </details>
 
-      <details class="habit">
-        <summary>০৫ · 🔕 Notification বন্ধ</summary>
+      <details class="habit" data-habit="h5">
+        <summary><span>০৫ · 🔕 Notification বন্ধ</span><span class="habit-badge" data-badge="h5">0/2</span></summary>
         <div class="habit-body">
-          <p>Facebook, Messenger, YouTube, Instagram-এর notification attention ভেঙে দেয়।</p>
-          <label class="check"><input type="checkbox" data-chk="h5a"><span>সব অ্যাপের notification বন্ধ</span></label>
-          <label class="check"><input type="checkbox" data-chk="h5b"><span>ল্যাপটপে Do Not Disturb চালু</span></label>
+          <label class="check"><input type="checkbox" data-chk="h5a" data-habit="h5"><span>সব অ্যাপের notification বন্ধ</span></label>
+          <label class="check"><input type="checkbox" data-chk="h5b" data-habit="h5"><span>Do Not Disturb চালু</span></label>
         </div>
       </details>
 
-      <details class="habit">
-        <summary>০৬ · 🗒️ Distraction List</summary>
+      <details class="habit" data-habit="h6">
+        <summary><span>০৬ · 🗒️ Distraction List</span><span class="habit-badge" data-badge="h6">0/2</span></summary>
         <div class="habit-body">
-          <p>কাজের মাঝে অন্য চিন্তা এলে সঙ্গে সঙ্গে না গিয়ে লিখে রাখুন।</p>
-          <label class="check"><input type="checkbox" data-chk="h6a"><span>Distraction List ব্যবহার করেছি</span></label>
-          <label class="check"><input type="checkbox" data-chk="h6b"><span>বিরতিতে লিস্ট রিভিউ করেছি</span></label>
+          <label class="check"><input type="checkbox" data-chk="h6a" data-habit="h6"><span>Distraction List ব্যবহার করেছি</span></label>
+          <label class="check"><input type="checkbox" data-chk="h6b" data-habit="h6"><span>বিরতিতে লিস্ট রিভিউ করেছি</span></label>
         </div>
       </details>
 
-      <details class="habit">
-        <summary>০৭ · 😴 ঘুম ও বিরতি</summary>
+      <details class="habit" data-habit="h7">
+        <summary><span>০৭ · 😴 ঘুম ও বিরতি</span><span class="habit-badge" data-badge="h7">0/2</span></summary>
         <div class="habit-body">
-          <p>পর্যাপ্ত ঘুম ও নিয়মিত ছোট বিরতি দীর্ঘ মনোযোগ ধরে রাখে।</p>
-          <label class="check"><input type="checkbox" data-chk="h7a"><span>৭+ ঘণ্টা ঘুমিয়েছি</span></label>
-          <label class="check"><input type="checkbox" data-chk="h7b"><span>প্রতি ২৫ মিনিটে বিরতি নিয়েছি</span></label>
+          <label class="check"><input type="checkbox" data-chk="h7a" data-habit="h7"><span>৭+ ঘণ্টা ঘুমিয়েছি</span></label>
+          <label class="check"><input type="checkbox" data-chk="h7b" data-habit="h7"><span>প্রতি ২৫ মিনিটে বিরতি নিয়েছি</span></label>
         </div>
       </details>
 
-      <details class="habit">
-        <summary>০৮ · 🕗 একই সময়ে Deep Work</summary>
+      <details class="habit" data-habit="h8">
+        <summary><span>০৮ · 🕗 একই সময়ে Deep Work</span><span class="habit-badge" data-badge="h8">0/2</span></summary>
         <div class="habit-body">
-          <p>প্রতিদিন একই সময়ে (যেমন সকাল ৮–১০) শুধু CS/Programming।</p>
-          <label class="check"><input type="checkbox" data-chk="h8a"><span>নির্ধারিত সময়ে বসেছি</span></label>
-          <label class="check"><input type="checkbox" data-chk="h8b"><span>পুরো সময় একটানা কাজ করেছি</span></label>
+          <label class="check"><input type="checkbox" data-chk="h8a" data-habit="h8"><span>নির্ধারিত সময়ে বসেছি</span></label>
+          <label class="check"><input type="checkbox" data-chk="h8b" data-habit="h8"><span>পুরো সময় একটানা কাজ করেছি</span></label>
         </div>
       </details>
     </section>
@@ -187,20 +223,18 @@
       <h3>⚙️ সেটিংস</h3>
 
       <div class="switch-row">
-        <div>
-          <b>Desktop Notification</b>
-          <p class="hint">সেশন শেষে জানাবে।</p>
-        </div>
-        <label class="switch">
-          <input type="checkbox" id="notifToggle" checked>
-          <span class="slider"></span>
-        </label>
+        <div><b>Desktop Notification</b><p class="hint">সেশন শেষে জানাবে।</p></div>
+        <label class="switch"><input type="checkbox" id="notifToggle" checked><span class="slider"></span></label>
+      </div>
+
+      <div class="switch-row">
+        <div><b>🔊 এলার্ম (৫ সেকেন্ড)</b><p class="hint">সেশন শেষে বাজবে।</p></div>
+        <label class="switch"><input type="checkbox" id="soundToggle" checked><span class="slider"></span></label>
       </div>
 
       <div class="divider"></div>
 
       <h3>🕗 Deep Work সময়</h3>
-      <p class="hint">প্রতিদিন যেই সময়ে গভীর কাজ করবেন।</p>
       <div class="two-inputs">
         <input type="time" id="dwStart" value="08:00"/>
         <input type="time" id="dwEnd" value="10:00"/>
@@ -210,14 +244,12 @@
       <div class="divider"></div>
 
       <h3>😴 ঘুম ক্যালকুলেটর</h3>
-      <p class="hint">কয়টায় উঠবেন?</p>
       <input type="time" id="wakeTime" value="06:00"/>
       <div id="sleepResults" class="sleep-results"></div>
 
       <div class="divider"></div>
 
-      <h3>📊 অগ্রগতি</h3>
-      <div id="progressList" class="progress-list"></div>
+      <button class="btn ghost full" id="testAlarm">🔊 এলার্ম টেস্ট</button>
 
       <div class="divider"></div>
 
@@ -230,3 +262,4 @@
 <script src="popup.js"></script>
 </body>
 </html>
+
